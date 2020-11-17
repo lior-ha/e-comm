@@ -1,13 +1,15 @@
-import HomePage from './pages/homepage/homepage.component';
-import ShopPage from './pages/shop/shop.component';
-
 import { Switch, Route } from 'react-router-dom';
 
 import './App.css';
 
+import HomePage from './pages/homepage/homepage.component';
+import ShopPage from './pages/shop/shop.component';
+import Header from './components/header/header.component';
+
 function App() { 
   return (
     <div>
+        <Header />
         <Switch> {/* Switch - Optionl - Makes the code render the first hit from the Routes */}
             <Route exact path='/' component={HomePage} />
             <Route path='/shop' component={ShopPage} />
