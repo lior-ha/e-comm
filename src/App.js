@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import './App.css';
 
@@ -9,6 +10,7 @@ import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
+import { selectCurrentUser } from './redux/user/user.selectors';
 
 import SignInAndSignOutPage from './pages/sign-in-and-sign-out/sign-in-and-sign-out.component';
 
@@ -61,9 +63,13 @@ class App extends React.Component {
     )};
 }
 
-const mapStateToProps = state => ({
-    currentUser: state.user.currentUser
-});
+// const mapStateToProps = state => ({
+//     currentUser: state.user.currentUser
+// });
+const mapStateToProps = createStructuredSelector({ 
+    currentUser: selectCurrentUser
+})
+
 
 // dispatch tells redux that whatever object is being passed is an action to be send to every reducer
 // The action returns an object with type and payload to send to the reducer
