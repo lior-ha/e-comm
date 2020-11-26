@@ -1,5 +1,10 @@
 import { SpinnerOverlay, SpinnerContainer} from './with-spinner.styles';
 
+// WithSpinner helps with async data before we initialize the components using Higher Order Component
+// (HOC), which is a component that wrappes a component and returning other components, to extend
+// or reuse functionallity
+
+
 // HOC - Higher Order Component
 const WithSpinner = WrappedComponent => {
     const Spinner = ({ isLoading, ...otherProps }) => {
