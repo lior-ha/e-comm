@@ -8,7 +8,6 @@ import { SpinnerOverlay, SpinnerContainer} from './with-spinner.styles';
 // HOC - Higher Order Component
 const WithSpinner = WrappedComponent => {
     const Spinner = ({ isLoading, ...otherProps }) => {
-        console.log('isLoading', isLoading);
         return isLoading ? (
             <SpinnerOverlay>
                 <SpinnerContainer />
