@@ -15,7 +15,7 @@ const StripteCheckoutButton = ({ price }) => {
             }
         })
         .then (response => { 
-            alert('Payment Successful');
+            alert('Payment Successful 123');
         })
         .catch(error => {
             console.log('Payment Error: ', JSON.parse(error));
