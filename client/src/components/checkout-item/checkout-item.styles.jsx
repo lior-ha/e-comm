@@ -18,15 +18,34 @@ export const ImageContainer = styled.div`
         width: 100%;
         height: 100%;
     }
+    @media screen and (max-width: 800px) {
+        width: 22%;
+    }
 `
 
-export const TextContainer = styled.span`
+export const TitleContainer = styled.span`
     width: 23%;
+    @media screen and (max-width: 800px) {
+        width: 22%;
+    }
 `
 
+export const PriceContainer = styled.span`
+    width: 23%;
+
+    @media screen and (max-width: 800px) {
+        text-align: center;
+        width: 22%;
+    }
+`
 export const QuantityContainer = styled.div`
     width: 23%;
     display: flex;
+    
+    @media screen and (max-width: 800px) {
+        width: 22%;
+        justify-content: center;
+    }
 
     div {
         cursor: pointer;
@@ -40,4 +59,7 @@ export const QuantityContainer = styled.div`
 export const RemoveButtonContainer = styled.div`
     padding-left: 12px;
     cursor: pointer;
+    @media screen and (max-width: 800px) {
+        width: 12%;
+    }
 `
