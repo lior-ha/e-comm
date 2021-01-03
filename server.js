@@ -18,14 +18,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(enforce.HTTPS({ trustProtoHeader: true })); // For Heroku
 app.use(cors());
 
-
-app.get('/service-worker.js', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', 'build', 'service-worker.js'));
-});
-
 if(process.env.NODE_ENV === 'production') {
     app.use(enforce.HTTPS({ trustProtoHeader: true }));
     app.use(express.static(path.join(__dirname, 'client/build')));
+    
+    app.get('/service-worker.js', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '..', 'build', 'service-worker.js'));
+    });
 
     app.get('*', function(req, res) {
         res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
