@@ -18,6 +18,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(enforce.HTTPS({ trustProtoHeader: true })); // For Heroku
 app.use(cors());
 
+
+app.get('/service-worker.js', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '..', 'build', 'service-worker.js'));
+});
+
 if(process.env.NODE_ENV === 'production') {
     app.use(enforce.HTTPS({ trustProtoHeader: true }));
     app.use(express.static(path.join(__dirname, 'client/build')));
@@ -26,19 +31,6 @@ if(process.env.NODE_ENV === 'production') {
         res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
     });
 }
-
-app.listen(port, error => {
-    if (error) throw error;
-    console.log('Server running on port ' + port);
-});
-
-app.get('/service-worker.js', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', 'build', 'service-worker.js'));
-})
-  
-app.get("*", function response(req, res) {
-    res.sendFile(path.join(__dirname, "public", "index.html"));
-});
 
 app.post('/payment', (req,res) => {
     const body = {
@@ -54,4 +46,9 @@ app.post('/payment', (req,res) => {
             res.status(200).send({success: stripeRes});
         }
     })
+});
+
+app.listen(port, error => {
+    if (error) throw error;
+    console.log('Server running on port ' + port);
 });
