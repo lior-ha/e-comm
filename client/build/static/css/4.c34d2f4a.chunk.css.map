@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/components/collections-overview/collections-overview.styles.scss"],"names":[],"mappings":"AAAA,sBACC,YAAa,CACb,qBAAsB","file":"4.c34d2f4a.chunk.css","sourcesContent":[".collections-overview {\r\n\tdisplay: flex;\r\n\tflex-direction: column;\r\n}\r\n"]}
