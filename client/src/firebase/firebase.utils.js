@@ -12,10 +12,13 @@ const config = {
     appId: "1:465629343305:web:9eee05173a0df509f31998"
 };
 
+firebase.initializeApp(config);
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) return;
     
     const userRef = firestore.doc(`users/${userAuth.uid}`);
+    
     const snapShot = await userRef.get();
 
     if(!snapShot.exists) {
@@ -37,6 +40,19 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     return userRef;
 }
 
+export const getUserCartRef = async userId => {
+    const cartsRef = firestore.collection('carts').where('userId', '==', userId);
+    const snapShot = await cartsRef.get();
+    
+    if (snapShot.empty) {
+        const cartDocRef = firestore.collection('carts').doc();
+        await cartDocRef.set({ userId, cartItems: [] });
+        return cartDocRef;
+    } else {
+        return snapShot.docs[0].ref;
+    }
+};
+
 export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
     const collectionRef = firestore.collection(collectionKey);
 
@@ -50,7 +66,7 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
 }
 
 export const convertCollectionSnapshotToMap = collections => {
-    const trnasfromedCollection = collections.docs.map(doc => {
+    const transfromedCollection = collections.docs.map(doc => {
         const { title, items } = doc.data();
 
         return {
@@ -61,13 +77,11 @@ export const convertCollectionSnapshotToMap = collections => {
         }
     });
 
-    return trnasfromedCollection.reduce((accumulator, collection) => {
+    return transfromedCollection.reduce((accumulator, collection) => {
         accumulator[collection.title.toLowerCase()] = collection;
         return accumulator;
     }, {});
 }
-
-firebase.initializeApp(config);
 
 export const getCurrentUser = () => {
     return new Promise((resolve, reject) => {
