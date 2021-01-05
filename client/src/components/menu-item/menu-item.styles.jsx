@@ -12,13 +12,12 @@ export const MenuItemContainer = styled.div`
 	overflow: hidden;
 
 	&:hover {
-		cursor: pointer;
-
-		& .background-image {
+        cursor: pointer;
+        
+        & .background-image {
 			transform: scale(1.1);
 			transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
 		}
-
 		& .content {
 			opacity: 0.9;
 		}
@@ -40,13 +39,18 @@ export const MenuItemContainer = styled.div`
         height: 200px;
     }
 `
+MenuItemContainer.displayName = 'MenuItemContainer';
+
 
 export const BackgroundImageContainer = styled.div`
 		width: 100%;
 		height: 100%;
 		background-position: center;
-		background-size: cover;
+        background-size: cover;
+        background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 `
+BackgroundImageContainer.displayName = 'BackgroundImageContainer';
+
 
 export const ContentContainer = styled.div`
     height: 90px;
@@ -60,6 +64,10 @@ export const ContentContainer = styled.div`
     opacity: 0.7;
     position: absolute;
     z-index: 1;
+
+    &:hover {
+		opacity: 0.9;
+	}
 
     .title {
         font-weight: bold;
